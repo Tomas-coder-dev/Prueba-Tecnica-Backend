@@ -8,6 +8,7 @@ import ResponsiveMenu from './ResponsiveMenu';
 import { UpdateFollower } from 'react-mouse-follower';
 import { NavbarMenu } from './Navbar';
 import { ShopContext } from '../context/ShopContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar2 = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -15,6 +16,7 @@ const Navbar2 = () => {
     setShowMenu(!showMenu)
   }
   const {getTotalCartItems} = useContext(ShopContext)
+  const { user, logout } = useContext(AuthContext)
   return (
     <div className='text-foreground py-2 bg-gray-900/50 backdrop-blur-md border-b border-gray-800 z-10'>
       <div className='container flex justify-between items-center'>
@@ -65,9 +67,20 @@ const Navbar2 = () => {
                 mixBlendMode: "difference"
               }}
             >
-              <button className='text-xl ps-8'>
-                <FaRegUser />
-              </button>
+              {user ? (
+                <div className="flex items-center gap-4 ps-8 text-white">
+                  <span className="text-sm font-semibold">{user.name}</span>
+                  <button onClick={logout} className='text-sm bg-red-600 px-3 py-1 rounded-md hover:bg-red-700'>
+                    Cerrar sesión
+                  </button>
+                </div>
+              ) : (
+                <Link to='/login'>
+                  <button className='text-xl ps-8 text-white'>
+                    <FaRegUser />
+                  </button>
+                </Link>
+              )}
             </UpdateFollower>
 
           </ul>
