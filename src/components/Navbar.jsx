@@ -6,6 +6,7 @@ import { FaRegUser } from "react-icons/fa";
 import { HiMenuAlt1, HiMenuAlt3, } from "react-icons/hi";
 import ResponsiveMenu from './ResponsiveMenu';
 import { UpdateFollower } from 'react-mouse-follower';
+import { AuthContext } from '../context/AuthContext';
 
 
 export const NavbarMenu = [
@@ -38,6 +39,7 @@ export const NavbarMenu = [
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
+  const { user, logout } = React.useContext(AuthContext)
   const toggleMenu = () => {
     setShowMenu(!showMenu)
   }
@@ -92,9 +94,20 @@ const Navbar = () => {
               mixBlendMode: "difference"
             }}
             >
-            <button className='text-xl ps-8'>
-              <FaRegUser />
-            </button>
+            {user ? (
+              <div className="flex items-center gap-4 ps-8">
+                <span className="text-sm font-semibold">{user.name}</span>
+                <button onClick={logout} className='text-sm bg-red-600 px-3 py-1 rounded-md hover:bg-red-700'>
+                  Cerrar sesión
+                </button>
+              </div>
+            ) : (
+              <Link to='/login'>
+                <button className='text-xl ps-8'>
+                  <FaRegUser />
+                </button>
+              </Link>
+            )}
             </UpdateFollower>
 
           </ul>
