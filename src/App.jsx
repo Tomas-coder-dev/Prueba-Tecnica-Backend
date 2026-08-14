@@ -5,6 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './Pages/Home'
 import Contact from './Pages/Contact'
 import Cart from './Pages/Cart'
+import Login from './Pages/Login'
+import Register from './Pages/Register'
 import Footer from './components/Footer'
 import { UpdateFollower } from 'react-mouse-follower'
 import ProductList from './components/ProductList'
@@ -15,6 +17,14 @@ const router = createBrowserRouter([
   {
     path:'/',
     element: <><Home/><Footer/></>
+  },
+  {
+    path:'/login',
+    element: <><Navbar2/><Login/><Footer/></>
+  },
+  {
+    path:'/register',
+    element: <><Navbar2/><Register/><Footer/></>
   },
   {
     path:'/mens',
